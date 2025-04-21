@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captcha</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Captcha Verification</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f1f1f1; /* Soft gray background */
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,61 +17,64 @@
         }
 
         .container {
-            background-color: #444;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border: 2px solid #e60000;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             padding: 40px;
-            max-width: 420px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
-            color: #fff;
+            color: #333;
         }
 
         h2 {
-            color: #66b2ff; /* Custom blue color */
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: bold;
+            color: #e60000;
+            font-size: 26px;
+            margin-bottom: 24px;
+            font-weight: 700;
         }
 
         .captcha-image {
             display: block;
             margin: 0 auto 20px;
             max-width: 100%;
-            border: 3px solid #66b2ff; /* Blue border */
-            padding: 10px;
+            border: 2px dashed #e60000;
+            padding: 8px;
             border-radius: 8px;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         label {
-            font-size: 16px;
-            color: #fff;
+            font-size: 15px;
             font-weight: 600;
+            color: #444;
+            text-align: left;
         }
 
         input[type="text"] {
             padding: 12px;
             font-size: 16px;
-            border: 2px solid #ddd;
+            border: 1.5px solid #ccc;
             border-radius: 6px;
             outline: none;
-            transition: border 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
         input[type="text"]:focus {
-            border-color: #66b2ff; /* Blue on focus */
+            border-color: #e60000;
         }
 
         button {
-            background-color: #66b2ff; /* Blue background */
+            background-color: #e60000;
             color: white;
             font-size: 16px;
+            font-weight: 600;
             padding: 12px;
             border: none;
             border-radius: 6px;
@@ -80,26 +83,27 @@
         }
 
         button:hover {
-            background-color: #3399ff; /* Darker blue on hover */
+            background-color: #cc0000;
         }
 
         .error-message {
-            color: #ff3333;
+            color: #cc0000;
             font-size: 14px;
             font-weight: bold;
+            margin-top: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Enter the CAPTCHA Code</h2>
+        <h2>Verify You’re Not a Robot</h2>
 
         <!-- Display CAPTCHA image -->
-        <img class="captcha-image" src="data:image/png;base64,{{ captcha_image }}" alt="CAPTCHA Image">
+        <img class="captcha-image" src="data:image/png;base64,{{ captcha_image }}" alt="CAPTCHA Image" />
 
         <form method="POST" action="/">
-            <label for="code">Captcha Code:</label>
-            <input type="text" id="code" name="code" required>
+            <label for="code">Enter Code Below:</label>
+            <input type="text" id="code" name="code" required />
             <button type="submit">Submit</button>
         </form>
 
